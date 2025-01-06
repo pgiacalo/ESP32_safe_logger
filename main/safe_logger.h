@@ -80,5 +80,6 @@ static inline void log_bool(const char* tag, const char* msg, bool val) {
     char:     log_char, \
     bool:     log_bool, \
     char*:    log_str, \
-    const char*: log_str \
-)(tag, msg, val)
+    const char*: log_str)(tag, msg, val)
+
+    

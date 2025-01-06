@@ -3,15 +3,17 @@
 #include "freertos/task.h"
 #include "safe_logger.h"
 #include <stdbool.h>
+#include <limits.h>
+#include <stdint.h>
 
 static const char *TAG = "LoggerTest";
 
 void test_all_types(void) {
     // Fixed-width unsigned integers
-    uint8_t u8 = 255;
-    uint16_t u16 = 65535;
-    uint32_t u32 = 4294967295;
-    uint64_t u64 = 18446744073709551615ULL;
+    uint8_t u8 = UINT8_MAX;
+    uint16_t u16 = UINT16_MAX;
+    uint32_t u32 = UINT32_MAX;
+    uint64_t u64 = UINT64_MAX;
 
     LOG_INFO(TAG, "uint8_t max", u8);
     LOG_INFO(TAG, "uint16_t max", u16);
@@ -19,10 +21,10 @@ void test_all_types(void) {
     LOG_INFO(TAG, "uint64_t max", u64);
 
     // Fixed-width signed integers
-    int8_t i8 = -128;
-    int16_t i16 = -32768;
-    int32_t i32 = -2147483648;
-    int64_t i64 = -9223372036854775808LL;
+    int8_t i8 = INT8_MIN;
+    int16_t i16 = INT16_MIN;
+    int32_t i32 = INT32_MIN;
+    int64_t i64 = INT64_MIN;
 
     LOG_INFO(TAG, "int8_t min", i8);
     LOG_INFO(TAG, "int16_t min", i16);
