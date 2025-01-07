@@ -1,22 +1,16 @@
 /* 
- * This file (main.c) is just a simple program designed to test all the 
- * LOG_XXX() functions provided in safe_logger.h 
+ * This file (main.c) shows how to use safe_logger.h
+ *
+ * This is a simple program designed to test all the 
+ * LOG_XXX() functions provided by safe_logger.h 
  */
 
-#include <stdio.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include <stdbool.h>
-#include <limits.h>
-#include <stdint.h>
-#include "esp_log.h"
 #include "safe_logger.h"
-
 
 static const char *TAG = "LoggerTest";
 
 void test_integers(void) {
-    printf("\nTesting integer types at all log levels...\n");
+    LOG_INFO(TAG, "Testing integer types at all log levels...", "\n");
     
     // Fixed-width unsigned integers
     uint8_t u8 = UINT8_MAX;
@@ -81,7 +75,7 @@ void test_integers(void) {
 }
 
 void test_floating_point(void) {
-    printf("\nTesting floating point types at all log levels...\n");
+    LOG_INFO(TAG, "Testing floating point types at all log levels...", "\n");
     
     float f = 3.14159f;
     double d = 2.7182818284590452353602874;
@@ -99,14 +93,14 @@ void test_floating_point(void) {
 
 void test_other_types(void) {
 
-    printf("\nTesting integers...\n");
+    LOG_INFO(TAG, "Testing integers...", "\n");
 
     test_integers();
 
-    printf("\nTesting floats...\n");
+    LOG_INFO(TAG, "Testing floats...", "\n");
     test_floating_point();
 
-    printf("\nTesting other types at all log levels...\n");
+    LOG_INFO(TAG, "Testing other types at all log levels...", "\n");
     
     // Character
     char c = 'X';
@@ -144,33 +138,25 @@ void test_other_types(void) {
 
 void app_main(void)
 {
-    printf("Starting comprehensive logging test\n");
+    LOG_INFO(TAG, "Starting comprehensive logging test", "\n");
 
     // Try both ways of setting debug level
     esp_log_level_set("*", ESP_LOG_DEBUG);
     ESP_LOG_LEVEL_LOCAL(ESP_LOG_DEBUG, TAG, "Direct ESP debug test");
 
-    printf("\nTesting integers:\n");
+    LOG_INFO(TAG, "Testing integers...", "\n");
     test_integers();
 
-    printf("\nTesting floats:\n");
+    LOG_INFO(TAG, "Testing floats...", "\n");
     test_floating_point();
 
-    printf("\nTesting all log levels:\n");
+    LOG_INFO(TAG, "Testing all log levels...", "\n");
     
-    // Test with ESP's macros directly first
-    ESP_LOGE(TAG, "ESP direct error test");
-    ESP_LOGW(TAG, "ESP direct warning test");
-    ESP_LOGI(TAG, "ESP direct info test");
-    ESP_LOGD(TAG, "ESP direct debug test");
-
-    printf("\nNow testing our logger:\n");
+    LOG_INFO(TAG, "Now testing our logger...", "\n");
     LOG_ERROR(TAG, "Error test", 42);
     LOG_WARN(TAG, "Warning test", 42);
     LOG_INFO(TAG, "Info test", 42);
     LOG_DEBUG(TAG, "Debug test", 42);
 
-    while(1) {
-        vTaskDelay(pdMS_TO_TICKS(1000));
-    }
+    LOG_INFO(TAG, "Logger test complete: ", "END");
 }
