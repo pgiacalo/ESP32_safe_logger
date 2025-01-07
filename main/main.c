@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "safe_logger.h"
 #include <stdbool.h>
 #include <limits.h>
 #include <stdint.h>
 #include "esp_log.h"
+#include "safe_logger.h"
 
 
 static const char *TAG = "LoggerTest";
@@ -93,6 +93,14 @@ void test_floating_point(void) {
 }
 
 void test_other_types(void) {
+
+    printf("\nTesting integers...\n");
+
+    test_integers();
+
+    printf("\nTesting floats...\n");
+    test_floating_point();
+
     printf("\nTesting other types at all log levels...\n");
     
     // Character
@@ -136,6 +144,12 @@ void app_main(void)
     // Try both ways of setting debug level
     esp_log_level_set("*", ESP_LOG_DEBUG);
     ESP_LOG_LEVEL_LOCAL(ESP_LOG_DEBUG, TAG, "Direct ESP debug test");
+
+    printf("\nTesting integers:\n");
+    test_integers();
+
+    printf("\nTesting floats:\n");
+    test_floating_point();
 
     printf("\nTesting all log levels:\n");
     
