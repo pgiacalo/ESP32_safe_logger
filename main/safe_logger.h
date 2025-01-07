@@ -1,17 +1,18 @@
 /*
 
-This file is an attempt to fix the very annoying ESP-IDF compiler error that often occurs when logging or printing a message and a value.
+This c code for the ESP32 fixes the very annoying ESP-IDF compiler error that often occurs when logging or printing a message and a value.
 
         error: format '%u' expects argument of type 'unsigned int', but argument 6 has type 'uint32_t'
 
-To avoid this error, call the logging functions provided herein (rather than calling print() or ESP_LOGx() functions):
+To avoid this error, call the logging functions provided in this header file, instead of calling printf() or ESP_LOGx() functions):
 
      LOG_INFO(tag, msg, val)
      LOG_WARN(tag, msg, val)
      LOG_ERROR(tag, msg, val)
      LOG_DEBUG(tag, msg, val)
 
-These are wrapper functions that will correctly handle any built-in val type and thereby avoid the compiler error. 
+These 4 functions are wrappers around the ESP_LOGx functions (hiding the casting and formatting problems of the ESP-IDF compiler).
+These 4 functions will correctly handle any built-in val type and thereby avoid the compiler error. 
 
 ---------
 

@@ -93,13 +93,6 @@ void test_floating_point(void) {
 
 void test_other_types(void) {
 
-    LOG_INFO(TAG, "Testing integers...", "\n");
-
-    test_integers();
-
-    LOG_INFO(TAG, "Testing floats...", "\n");
-    test_floating_point();
-
     LOG_INFO(TAG, "Testing other types at all log levels...", "\n");
     
     // Character
@@ -138,7 +131,7 @@ void test_other_types(void) {
 
 void app_main(void)
 {
-    LOG_INFO(TAG, "Starting comprehensive logging test", "\n");
+    LOG_INFO(TAG, "..............Starting comprehensive logging test..............", "\n");
 
     // Try both ways of setting debug level
     esp_log_level_set("*", ESP_LOG_DEBUG);
@@ -150,13 +143,11 @@ void app_main(void)
     LOG_INFO(TAG, "Testing floats...", "\n");
     test_floating_point();
 
-    LOG_INFO(TAG, "Testing all log levels...", "\n");
-    
-    LOG_INFO(TAG, "Now testing our logger...", "\n");
-    LOG_ERROR(TAG, "Error test", 42);
-    LOG_WARN(TAG, "Warning test", 42);
-    LOG_INFO(TAG, "Info test", 42);
-    LOG_DEBUG(TAG, "Debug test", 42);
+    LOG_INFO(TAG, "Testing other types...", "\n");
+    test_other_types();
 
     LOG_INFO(TAG, "Logger test complete: ", "END");
+
+    LOG_INFO(TAG, "..............Press Ctrl+] to quit the monitor..............", "");
+
 }
