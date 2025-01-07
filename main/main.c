@@ -1,3 +1,8 @@
+/* 
+ * This file (main.c) is just a simple program designed to test all the 
+ * LOG_XXX() functions provided in safe_logger.h 
+ */
+
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
